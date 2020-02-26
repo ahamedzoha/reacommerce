@@ -3,16 +3,17 @@ import './App.css';
 import { Route, Switch, Link } from 'react-router-dom'
 
 import { HomePage } from './pages/homepage/homepage.component'
+import ShopPage from './pages/shop/shop.component'
 
 class App extends React.Component {
   
   render() {
 
     return (
-      <div>
+      <Switch>
         <Route exact path="/" component={HomePage} />
-        
-      </div>
+        <Route  path="/shop" component={ShopPage}/>
+      </Switch>
     )
   }
 
