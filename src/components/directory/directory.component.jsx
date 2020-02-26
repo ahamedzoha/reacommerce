@@ -1,7 +1,7 @@
 import React from 'react'
 import './directory.styles.scss'
 
-import { MenuItems } from '../menu-items/menu-items.component'
+import MenuItems from '../menu-items/menu-items.component'
 
 export class Directory extends React.Component {
     constructor() {
@@ -52,7 +52,7 @@ export class Directory extends React.Component {
                     <MenuItems
                         imageUrl= {imageUrl} 
                         size = {size}
-                        title={title.toUpperCase()}
+                        title={title}
                         key = {id}  
                     />
                 ))}

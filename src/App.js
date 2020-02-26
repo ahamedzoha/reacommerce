@@ -1,22 +1,17 @@
 import React from 'react';
 import './App.css';
+import { Route, Switch, Link } from 'react-router-dom'
 
-import {HomePage} from './pages/homepage/homepage.component'
+import { HomePage } from './pages/homepage/homepage.component'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-
-
-  }
-
-
-
+  
   render() {
 
     return (
       <div>
-        <HomePage/>
+        <Route exact path="/" component={HomePage} />
+        
       </div>
     )
   }
