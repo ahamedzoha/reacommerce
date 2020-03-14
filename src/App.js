@@ -11,7 +11,7 @@ import { auth } from "./firebase/firebase.utils"
 import ReactGA from "react-ga"
 
 export const initGA = () => {
-  console.log("GA Init")
+  console.log("GA Initialized")
   ReactGA.initialize("UA-41008872-4")
 }
 
