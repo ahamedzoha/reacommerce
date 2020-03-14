@@ -1,5 +1,4 @@
-import React, { useEffect } from "react"
-import ReactGa from "react-ga"
+import React from "react"
 import "./homepage.styles.scss"
 //import { Link } from 'react-router-dom'
 
