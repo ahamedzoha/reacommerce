@@ -8,7 +8,15 @@ import ShopPage from "./pages/shop/shop.component"
 import { SignInAndOut } from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component"
 
 import { auth } from "./firebase/firebase.utils"
-import { init_google_analytics, log_page_view } from "./utils/_analytics"
+import { createBrowserHistory } from "history"
+import ReactGA from "react-ga"
+
+const history = createBrowserHistory()
+ReactGA.initialize("UA-41008872-4")
+history.listen(location => {
+  ReactGA.set({ page: location.pathname }) // Update the user's current page
+  ReactGA.pageview(location.pathname) // Record a pageview for the given page
+})
 
 class App extends React.Component {
   constructor() {
@@ -17,9 +25,6 @@ class App extends React.Component {
       currentUser: null
     }
   }
-
-  init_google_analytics
-  log_page_view
 
   unsubscribeFromAuth = null
 
@@ -39,9 +44,9 @@ class App extends React.Component {
       <div>
         <Header currentUser={this.state.currentUser} />
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route path="/signin" component={SignInAndOut} />
+          <Route exact path="/" history={history} component={HomePage} />
+          <Route path="/shop" history={history} component={ShopPage} />
+          <Route path="/signin" history={history} component={SignInAndOut} />
         </Switch>
       </div>
     )
