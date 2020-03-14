@@ -10,7 +10,7 @@ export const HomePage = () => {
     ReactGa.initialize("UA-41008872-4")
 
     // For Pageview
-    ReactGa.pageview("/")
+    ReactGa.pageview(window.location.pathname + window.location.search)
   }, [])
 
   return (
