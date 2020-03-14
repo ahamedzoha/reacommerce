@@ -1,7 +1,7 @@
 import React from "react"
 import "./App.css"
 import { Route, Switch } from "react-router-dom"
-//import ReactGa from "react-ga"
+import ReactGa from "react-ga"
 
 import { HomePage } from "./pages/homepage/homepage.component"
 import { Header } from "./components/header/header.component"
@@ -9,6 +9,11 @@ import ShopPage from "./pages/shop/shop.component"
 import { SignInAndOut } from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component"
 
 import { auth } from "./firebase/firebase.utils"
+
+function initializeAnalytics() {
+  ReactGa.initialize("UA-41008872-4")
+  ReactGa.pageview(window.location.pathname)
+}
 
 class App extends React.Component {
   constructor() {
@@ -32,6 +37,7 @@ class App extends React.Component {
   }
 
   render() {
+    initializeAnalytics()
     return (
       <div>
         <Header currentUser={this.state.currentUser} />
