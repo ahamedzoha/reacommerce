@@ -2,7 +2,7 @@ import ReactGa from "react-ga"
 
 export const init_google_analytics = () => {
   console.log("Google Analytics Initialized")
-  ReactGa.initialize("UA-41008872-4")
+  ReactGa.initialize("UA-41008872-5")
 }
 
 export const log_page_view = () => {
