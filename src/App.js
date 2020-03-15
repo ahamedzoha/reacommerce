@@ -1,45 +1,36 @@
-import React from "react"
-import "./App.css"
-import { Route, Switch } from "react-router-dom"
+import React from "react";
+import "./App.css";
+import { Route, Switch } from "react-router-dom";
 
-import { HomePage } from "./pages/homepage/homepage.component"
-import { Header } from "./components/header/header.component"
-import ShopPage from "./pages/shop/shop.component"
-import { SignInAndOut } from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component"
+import { HomePage } from "./pages/homepage/homepage.component";
+import { Header } from "./components/header/header.component";
+import ShopPage from "./pages/shop/shop.component";
+import { SignInAndOut } from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
-import { auth } from "./firebase/firebase.utils"
-import ReactGA from "react-ga"
+import { auth } from "./firebase/firebase.utils";
+import { init_google_analytics, log_page_view } from "./utils/_analytics";
 
-export const initGA = () => {
-  console.log("GA Initialized")
-  ReactGA.initialize("UA-41008872-5")
-}
-
-export const logview = () => {
-  ReactGA.set({ page: window.location.pathname })
-  ReactGA.pageview(window.location.pathname)
-}
 class App extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       currentUser: null
-    }
+    };
   }
 
-  unsubscribeFromAuth = null
+  unsubscribeFromAuth = null;
 
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user })
-      console.log(user)
-    })
-    initGA()
-    logview()
+      this.setState({ currentUser: user });
+      console.log(user);
+    });
+    init_google_analytics();
+    log_page_view();
   }
 
   componentWillUnmount() {
-    this.unsubscribeFromAuth()
+    this.unsubscribeFromAuth();
   }
 
   render() {
@@ -52,8 +43,8 @@ class App extends React.Component {
           <Route path="/signin" component={SignInAndOut} />
         </Switch>
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
