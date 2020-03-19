@@ -1,36 +1,35 @@
-import React from "react";
-import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import React from "react"
+import "./App.css"
+import { Route, Switch } from "react-router-dom"
 
-import { HomePage } from "./pages/homepage/homepage.component";
-import { Header } from "./components/header/header.component";
-import ShopPage from "./pages/shop/shop.component";
-import { SignInAndOut } from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import { HomePage } from "./pages/homepage/homepage.component"
+import { Header } from "./components/header/header.component"
+import ShopPage from "./pages/shop/shop.component"
+import { SignInAndOut } from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component"
 
-import { auth } from "./firebase/firebase.utils";
-import { init_google_analytics, log_page_view } from "./utils/_analytics";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils"
+import { init_google_analytics, log_page_view } from "./utils/_analytics"
 
 class App extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       currentUser: null
-    };
+    }
   }
 
-  unsubscribeFromAuth = null;
+  unsubscribeFromAuth = null
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user });
-      console.log(user);
-    });
-    init_google_analytics();
-    log_page_view();
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
+      createUserProfileDocument(user)
+    })
+    init_google_analytics()
+    log_page_view()
   }
 
   componentWillUnmount() {
-    this.unsubscribeFromAuth();
+    this.unsubscribeFromAuth()
   }
 
   render() {
@@ -43,8 +42,8 @@ class App extends React.Component {
           <Route path="/signin" component={SignInAndOut} />
         </Switch>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
