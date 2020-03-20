@@ -20,8 +20,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   const snapShot = await userRef.get()
 
-  console.log(snapShot)
-
   // if user doesn't exist at reference location, create new user
   if (!snapShot.exists) {
     const { displayName, email } = userAuth
